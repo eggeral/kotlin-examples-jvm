@@ -1,7 +1,5 @@
 package ese.kotlin.basics.ar_gol_grid_array
 
-import ese.kotlin.basics.at_gol_grid_board.Cell
-import ese.kotlin.basics.at_gol_grid_board.Game
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -124,17 +122,17 @@ class GolSpec {
         )
 
         // when / then
-        assertEquals(2, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(0, 0))
-        assertEquals(1, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(1, 0))
-        assertEquals(2, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(2, 0))
+        assertEquals(2, cells.countLivingNeighbours(0, 0))
+        assertEquals(1, cells.countLivingNeighbours(1, 0))
+        assertEquals(2, cells.countLivingNeighbours(2, 0))
 
-        assertEquals(3, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(0, 1))
-        assertEquals(2, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(1, 1))
-        assertEquals(3, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(2, 1))
+        assertEquals(3, cells.countLivingNeighbours(0, 1))
+        assertEquals(2, cells.countLivingNeighbours(1, 1))
+        assertEquals(3, cells.countLivingNeighbours(2, 1))
 
-        assertEquals(2, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(0, 2))
-        assertEquals(1, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(1, 2))
-        assertEquals(2, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(2, 2))
+        assertEquals(2, cells.countLivingNeighbours(0, 2))
+        assertEquals(1, cells.countLivingNeighbours(1, 2))
+        assertEquals(2, cells.countLivingNeighbours(2, 2))
 
         //given
         cells = arrayOf(
@@ -144,7 +142,7 @@ class GolSpec {
         )
 
         // when / then
-        assertEquals(8, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(1, 1))
+        assertEquals(8, cells.countLivingNeighbours(1, 1))
 
         //given
         cells = arrayOf(
@@ -154,7 +152,7 @@ class GolSpec {
         )
 
         // when / then
-        assertEquals(0, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(1, 1))
+        assertEquals(0, cells.countLivingNeighbours(1, 1))
 
         //given
         cells = arrayOf(
@@ -164,7 +162,7 @@ class GolSpec {
         )
 
         // when / then
-        assertEquals(4, ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(1, 1))
+        assertEquals(4, cells.countLivingNeighbours(1, 1))
 
     }
 

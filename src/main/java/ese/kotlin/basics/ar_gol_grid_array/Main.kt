@@ -1,8 +1,5 @@
 package ese.kotlin.basics.ar_gol_grid_array
 
-import ese.kotlin.basics.at_gol_grid_board.Cell
-import ese.kotlin.basics.at_gol_grid_board.Game
-
 fun main(args: Array<String>) {
 
     val cells = arrayOf(

@@ -1,7 +1,5 @@
 package ese.kotlin.basics.ar_gol_grid_array
 
-import ese.kotlin.basics.at_gol_grid_board.Cell
-
 class Game(private val cells: Array<Array<Cell>>) {
 
 
@@ -9,7 +7,7 @@ class Game(private val cells: Array<Array<Cell>>) {
 
         for ((rowIdx, row) in cells.withIndex()) {
             for ((colIdx, cell) in row.withIndex()) {
-                cell.livingNeighbours = ese.kotlin.basics.at_gol_grid_board.countLivingNeighbours(colIdx, rowIdx)
+                cell.livingNeighbours = cells.countLivingNeighbours(colIdx, rowIdx)
             }
         }
 
