@@ -1,8 +1,5 @@
 package ese.kotlin.basics.ao_java_interop
 
-import org.w3c.dom.DOMImplementation
-import org.w3c.dom.Document
-import org.w3c.dom.Element
 import javax.xml.parsers.DocumentBuilderFactory
 import kotlin.test.*
 
