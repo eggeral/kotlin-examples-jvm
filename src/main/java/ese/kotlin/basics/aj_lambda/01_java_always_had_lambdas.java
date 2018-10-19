@@ -35,10 +35,24 @@ class JavaAlwaysHadLambdas {
         });
         System.out.println("anonymous:\t" + aList);
 
-        //Java 8 gives us Lambdas for that (but Android has not Java 8)
-        //Collections.shuffle(aList);
-        //Collections.sort(aList, (String lhs, String rhs) -> lhs.compareToIgnoreCase(rhs));
-        ///System.out.println("lambda:\t\t" + aList);
+        // Java 8 gives us Lambdas for that (but we might not be able to use them in Android)
+        //
+        // add the following to the build.gradle of the module/lib
+        //
+        // android {
+        // ...
+        //     // Configure only for each module that uses Java 8
+        //     // language features (either in its source code or
+        //     // through dependencies).
+        //     compileOptions {
+        //         sourceCompatibility JavaVersion.VERSION_1_8
+        //         targetCompatibility JavaVersion.VERSION_1_8
+        //     }
+        // }
+        //
+        Collections.shuffle(aList);
+        Collections.sort(aList, (String lhs, String rhs) -> lhs.compareToIgnoreCase(rhs));
+        System.out.println("lambda:\t\t" + aList);
 
         //Nice but there is more!
 

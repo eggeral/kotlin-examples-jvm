@@ -19,7 +19,7 @@ class _01_properties {
         assertNull(address.street)
         assertNull(address.city)
 
-        // address.id = 20 can not do this
+        // address.id = 20  // can not do this
         address.street = "Feldgasse"
         address.city = "Gleisdorf"
 

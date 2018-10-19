@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
     doWithEach(flights, System.out::println)
 
     println("---")
-    doWithEach(flights, { flight -> println(flight.substring(0, 2)) })
+    doWithEach(flights) { flight -> println(flight.substring(0, 2)) }
 }
 
 fun doWithEach(flights: Array<String>, consumer: (flight: String) -> Unit) {
@@ -18,3 +18,4 @@ fun doWithEach(flights: Array<String>, consumer: (flight: String) -> Unit) {
         consumer(flight)
     }
 }
+

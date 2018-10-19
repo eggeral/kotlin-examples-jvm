@@ -9,6 +9,7 @@ public class JavaCustomer {
     private int orders;
 
     // 1 create constructor
+
     public JavaCustomer(String name, String address, int orders) {
         this.name = name;
         this.address = address;
@@ -42,7 +43,6 @@ public class JavaCustomer {
     }
 
     // 3 create equals and hashCoder()
-
 
     @Override
     public boolean equals(Object o) {

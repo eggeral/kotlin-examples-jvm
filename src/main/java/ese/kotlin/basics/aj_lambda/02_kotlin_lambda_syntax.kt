@@ -4,8 +4,6 @@ import java.util.Comparator
 
 fun main(args: Array<String>) {
 
-    // 01 -> JavaAlwaysHadLambdas
-
     // 02 sorting in Kotlin
     val array = arrayOf("z", "B", "a")
     println("original:\t${array.contentToString()}")

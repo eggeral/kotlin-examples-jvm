@@ -1,8 +1,8 @@
 package ese.kotlin.basics.ap_gol
 
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
-import kotlin.test.Test
 
 class CellSpec {
 

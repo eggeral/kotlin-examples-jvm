@@ -1,5 +1,9 @@
 package ese.kotlin.basics.ao_java_interop
 
+import org.w3c.dom.DOMImplementation
+import org.w3c.dom.Document
+import org.w3c.dom.Element
+import javax.xml.parsers.DocumentBuilderFactory
 import kotlin.test.*
 
 class _01_call_java_from_kotlin {
@@ -69,6 +73,22 @@ class _01_call_java_from_kotlin {
         // formatFlightNumber(null) // does not work!
         assertEquals("4--1234--", formatFlightNumber(javaFLightDb.flightNumbers[1]))
         assertFailsWith<IllegalStateException> { formatFlightNumber(javaFLightDb.flightNumbers[0]) } // this is null but Kotlin does not check it!
+
+        // Real world DOM Java NULL interop problem
+        val dbf = DocumentBuilderFactory.newInstance()
+        val builder = dbf.newDocumentBuilder()
+        val doc = builder.newDocument()
+
+        val element = doc.createElement("root")
+        element.setAttribute("test", "1234")
+        doc.appendChild(element)
+
+        val foundElement = doc.getElementsByTagName("root").item(0) // Kotlin infers foundElement as Node! which means Node or Node?
+        assertNotNull(foundElement)
+        assertEquals("1234", foundElement.attributes.getNamedItem("test").textContent)
+        assertFailsWith<IllegalStateException> { foundElement.attributes.getNamedItem("1234").textContent } // If this was Kotlin code the compiler would no allow this as getNamedItem can be null!
+
+        assertNull(foundElement.attributes?.getNamedItem("1234")?.textContent) // add ? tell the compiler to assume Node? here not Node!
 
     }
 

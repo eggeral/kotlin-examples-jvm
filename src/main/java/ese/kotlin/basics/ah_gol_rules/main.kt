@@ -13,12 +13,32 @@ package ese.kotlin.basics.ah_gol_rules
 
 // Write a main function which tests the implementation.
 
-fun isAliveInTheNextIteration(alive: Boolean, numberOfNeighbours: Int) : Boolean  {
-    return true
+
+//fun isAliveInTheNextIteration(alive: Boolean, livingNeighbours: Int): Boolean {
+//    return when {
+//        alive && livingNeighbours < 2 -> false
+//        alive && (livingNeighbours == 2 || livingNeighbours == 3) -> true
+//        alive && livingNeighbours > 3 -> false
+//        !alive && livingNeighbours == 3 -> true
+//        else -> false
+//    }
+//}
+
+//fun isAliveInTheNextIteration(alive: Boolean, livingNeighbours: Int): Boolean {
+//    return when {
+//        alive && (livingNeighbours == 2 || livingNeighbours == 3) -> true
+//        !alive && livingNeighbours == 3 -> true
+//        else -> false
+//    }
+//}
+
+fun isAliveInTheNextIteration(alive: Boolean, livingNeighbours: Int): Boolean {
+    return when (alive) {
+        true -> livingNeighbours in 2..3
+        false -> livingNeighbours == 3
+    }
 }
 
 fun main(args: Array<String>) {
-
-
 
 }

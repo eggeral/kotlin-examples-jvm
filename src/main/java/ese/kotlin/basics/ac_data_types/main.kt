@@ -30,6 +30,26 @@ fun main(args: Array<String>) {
     println("anIntValue=$anIntValue")
     println("anotherIntValue=$anotherIntValue")
     println("sum: ${anIntValue + anotherIntValue}")
+    val multiLineString =
+            """
+                hallo
+                world
+            """
+    println(multiLineString)
+
+    val trimmedMultiLineString =
+            """
+                hallo
+                world
+            """.trimIndent()
+    println(trimmedMultiLineString)
+
+    val trimmedMarginMultiLineString =
+            """
+                |  hallo
+                |  world
+            """.trimMargin()
+    println(trimmedMarginMultiLineString)
 
     // 03 val or var
     val foo: Int = 1
@@ -76,5 +96,28 @@ fun main(args: Array<String>) {
     val calculatedArray: Array<String> = Array(5) { idx -> "${idx * idx}" } // array initialised by a function
     val arrayWithoutBoxingOverhead: IntArray = intArrayOf(1, 2, 3, 4)
 
+    // 07
+    // smaller types can not be assigned to larger type in
+    // order to avoid failing equals checks due to autoboxing
+    // see JavaAutoBoxingCompareProblem
+
+    // Hypothetical code, does not actually compile: (from Kotlin documentation)
+    //val a: Int? = 1 // A boxed Int (java.lang.Integer)
+    //val b: Long? = a // implicit conversion yields a boxed Long (java.lang.Long)
+    //print(b == a) // Surprise! This prints "false" as Long's equals() checks whether the other is Long as well
+
+    val aShort: Short = 42
+    var anInt = 45
+    // anInt = aShort / does not compile
+    anInt = aShort.toInt()
+    println(anInt == 42)
+
+    // Still be aware that two autoboxed value do not have the same reference ==
+    val a: Int = 10000
+    println(a == a) // Prints 'true'
+    val boxedA: Int? = a
+    val anotherBoxedA: Int? = a
+    println(boxedA == anotherBoxedA) // !!!Prints 'true'!!!
+    println(boxedA === anotherBoxedA) // !!!Prints 'false'!!!
 
 }
