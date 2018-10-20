@@ -2,8 +2,8 @@ package ese.kotlin.basics.at_gol_grid_board
 
 fun main(args: Array<String>) {
 
-    val game = Board(9,10)
-    game.setCells(
+    val board = Board(10,10)
+    board.setCells(
             """
             _________
             __***____
@@ -16,11 +16,22 @@ fun main(args: Array<String>) {
             """.trimIndent().cells())
 
     for (i in 0..19) {
-        println(game.asAsciiArt())
+        println(board.asAsciiArt())
         println()
         println("---------------------")
         println()
-        game.calculateNextGeneration()
+        board.calculateNextGeneration()
     }
 }
 
+fun Board.asAsciiArt(): String {
+    val builder = StringBuilder()
+    for (row in 0 until rows) {
+        for (column in 0 until columns) {
+            val cell = cellAt(column = column, row = row)
+            builder.append(if (cell.alive) "*" else "_")
+        }
+        builder.append('\n')
+    }
+    return builder.toString()
+}

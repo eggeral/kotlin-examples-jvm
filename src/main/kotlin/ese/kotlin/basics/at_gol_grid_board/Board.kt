@@ -10,7 +10,7 @@ class Board(val columns: Int, val rows: Int) {
 
         for ((rowIdx, row) in cells.withIndex()) {
             for ((colIdx, cell) in row.withIndex()) {
-                cell.livingNeighbours = cells.countLivingNeighbours(colIdx, rowIdx)
+                cell.livingNeighbours = countLivingNeighbours(colIdx, rowIdx)
             }
         }
 
@@ -31,43 +31,33 @@ class Board(val columns: Int, val rows: Int) {
         }
     }
 
-    fun countLivingNeighbours(column: Int, row: Int) = (row - 1..row + 1)
-            .flatMap { rowIdx -> (column - 1..column + 1).map { columnIdx -> Position2d(columnIdx, rowIdx) } }
-            .asSequence()
-            .filter { it.column in 0 until columns } // prevent array out of bounds
-            .filter { it.row in 0 until rows } // prevent array out of bounds
-            .filter { it != Position2d(column = column, row = row) } // do not count the cell itself
-            .map { cellAt(it) }.count { it.alive }
+    // try with 1000x1000 cells -> too many objects are created -> Iterators etc.
+    //    fun countLivingNeighbours(column: Int, row: Int) = (row - 1..row + 1)
+    //            .flatMap { rowIdx -> (column - 1..column + 1).map { columnIdx -> Position2d(columnIdx, rowIdx) } }
+    //            .asSequence()
+    //            .filter { it.column in 0 until columns } // prevent array out of bounds
+    //            .filter { it.row in 0 until rows } // prevent array out of bounds
+    //            .filter { it != Position2d(column = column, row = row) } // do not count the cell itself
+    //            .map { cellAt(it) }.count { it.alive }
 
-    fun asAsciiArt(): String {
-        val builder = StringBuilder()
-        for (row in cells) {
-            for (cell in row) {
-                builder.append(if (cell.alive) "*" else "_")
+    private fun cellIsInsideBoardAndAlive(column: Int, row: Int) =
+            column >= 0 && row >= 0 && column < columns && row < rows && cellAt(column, row).alive
+
+    fun countLivingNeighbours(column: Int, row: Int): Int {
+        var count = 0
+
+        for (currentRow in row - 1..row + 1) { // fortunately the Kotlin compiler does not create Range objects in this case!
+            for (currentColumn in column - 1..column + 1) {
+                if (cellIsInsideBoardAndAlive(currentColumn, currentRow) && !(currentRow == row && currentColumn == column)) // do not count the cell itself
+                    count++
             }
-            builder.append('\n')
         }
-        return builder.toString()
+        return count
+
+
     }
-}
-
-
-fun Array<Array<Cell>>.countLivingNeighbours(column: Int, row: Int): Int {
-    val maxRowIdx = size - 1
-    val maxColumnIdx = get(this.size - 1).size - 1
-
-    val rowIndices = (row - 1..row + 1).filter { it in 0..maxRowIdx }
-    val columnIndices = (column - 1..column + 1).filter { it in 0..maxColumnIdx }
-
-    return rowIndices
-            .flatMap { rowIdx -> columnIndices.map { columnIdx -> Pair(columnIdx, rowIdx) } }
-            .asSequence()
-            .filter { it != Pair(column, row) } // remove the cell itself
-            .map { (columnIdx, rowIdx) -> this[rowIdx][columnIdx] }
-            .count { it.alive }
 
 }
-
 
 fun String.cells(): Map<Position2d, Boolean> {
     val result = mutableMapOf<Position2d, Boolean>()
