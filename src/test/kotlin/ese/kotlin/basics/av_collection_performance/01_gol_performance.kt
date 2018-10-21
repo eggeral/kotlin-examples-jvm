@@ -5,6 +5,7 @@ import java.time.Instant
 import kotlin.test.Test
 
 /*
+
 Calculating the next generation of a GOL field
 
 = Board: 100x100
@@ -46,15 +47,14 @@ Using ifs took: 123ms
 Using for loop took: 133ms
 Using Kotlin collections took: 9176ms
 Using Kotlin sequences took: 7404ms
-Using ThinkAndVision series took: did not finish
+Using ThinkAndVision series took: 19413ms
 
 == JavaScript (Safari)
 Using ifs took: 123ms
 Using for loop took: 133ms
 Using Kotlin collections took: did not finish
 Using Kotlin sequences took: did not finish
-Using ThinkAndVision series took: 19413ms
-
+Using ThinkAndVision series took: did not finish
 
  */
 
